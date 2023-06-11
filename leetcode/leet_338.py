@@ -12,16 +12,17 @@
 
 
 class Solution:
-    def countBits(self, n: int) -> List[int]:
-        def bitcount(num):
-            return bin(num)[2:].count("1")
+    @staticmethod
+    def bitcount(num):
+        return bin(num)[2:].count("1")
 
+    def countBits(self, n: int) -> List[int]:
         bitcount_list = [-1] * 100000
         out = []
         for i in range(n + 1):
             bc = -1
             if bitcount_list[i] == -1:
-                bc = bitcount(i)  # this is a function which might take time
+                bc = self.bitcount(i)  # this is a function which might take time
                 bitcount_list.append(bc)
             else:
                 bc = bitcount_list[i]  # O(1)
