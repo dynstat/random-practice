@@ -28,21 +28,27 @@
 # Output: []
 
 
-class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        ans = []
+def combinationSum(candidates, target: int):  # returns  -> List[List[int]]
+    ans = []
 
-        def rec(i, current=[], total=0):  # it is DFS approach
-            if total == target:
-                ans.append(current.copy())  # to prevent the modification
-                return
-            if i >= len(candidates) or total > target:
-                return
-            current.append(candidates[i])
-            rec(i, current, total + candidates[i])
+    def rec(i, current=[], total=0):  # it is DFS approach
+        if total == target:
+            ans.append(current.copy())  # to prevent the modification
+            return
+        if i >= len(candidates) or total > target:
+            return
+        current.append(candidates[i])
+        rec(i, current, total + candidates[i])
 
-            current.pop()
-            rec(i + 1, current, total)
+        current.pop()
+        rec(i + 1, current, total)
 
-        rec(0)
-        return ans
+    rec(0)
+    return ans
+
+
+if __name__ == "__main__":
+    candidates = [2, 3, 6, 7]
+    target = 7
+
+    print(combinationSum(candidates, target))
