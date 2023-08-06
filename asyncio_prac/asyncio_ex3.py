@@ -1,5 +1,6 @@
 import time
 
+
 # Define a coroutine function
 async def my_coroutine():
     print("Coroutine started")
@@ -8,12 +9,14 @@ async def my_coroutine():
     time.sleep(2)  # Suspend execution for 2 seconds
     print("Coroutine ended")
 
+
 # Define a simple function to run a coroutine
 def run_coroutine(coro):
     try:
         coro.send(None)
     except StopIteration:
         pass
+
 
 # Run the coroutine
 coro = my_coroutine()
@@ -24,5 +27,5 @@ print("Main thread sleeping...")
 time.sleep(3)
 print("Main thread woke up")
 
-# Resume the coroutine
-run_coroutine(coro)
+# # Resume the coroutine
+# run_coroutine(coro)
