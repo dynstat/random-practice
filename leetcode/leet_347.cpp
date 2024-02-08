@@ -11,11 +11,15 @@ std::vector<int> topKFrequent(std::vector<int> &nums, int k)
         freqMap[num]++;
     }
 
+    // Define a lambda function 'compare' that takes two pairs of integers as input parameters
+    // The lambda function compares the second element of the pairs and returns true if the second element of the first pair is less than the second element of the second pair
     auto compare = [](const std::pair<int, int> &a, const std::pair<int, int> &b)
     {
         return a.second < b.second;
     };
 
+    // Create a priority queue 'pq' of pairs of integers, with the second integer in the pair being the priority value
+    // Use the 'compare' lambda function to compare the second elements of the pairs
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, decltype(compare)> pq(compare);
 
     for (auto &entry : freqMap)
@@ -35,6 +39,35 @@ std::vector<int> topKFrequent(std::vector<int> &nums, int k)
     }
 
     return result;
+}
+
+std::vector<int> topKFrequent2(std::vector<int> &nums, int k)
+{
+    std::unordered_map<int, int> count_map;
+
+    for (int num : nums)
+    {
+        try
+        {
+            count_map[num] += 1;
+        }
+        catch (...)
+        {
+            count_map[num] = 1;
+        }
+    }
+    int max = 0;
+    int second_max = 0;
+    for (auto &pair : count_map)
+    {
+        if (pair.second > max)
+        {
+            second_max = max;
+            max = pair.first;
+        }
+    }
+    std::vector<int> r = {2, 3};
+    return r;
 }
 
 int main()
